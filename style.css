@@ -1,0 +1,703 @@
+/* Membres de l'équipe :
+* Simon-Pierre Fortin
+* Alexandre Jolicoeur
+* Lindsay Radford
+* Michèle Mouafo
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
+
+/*
+Sections : Sidebar, Carnet, Inbox
+Fonctions : Nouveau Message, Recherche
+(chronologique)
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  font-display: 'PT Sans';
+}
+
+.contenant {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+#msgBienvenue {
+  color: #6693F4;
+  font-family: Impact, Charcoal, sans-serif;
+  font-style: italic;
+  /* background-image: linear-gradient(to right, #4065B7, #6693F4); */
+  margin-bottom: 5px;
+}
+
+blockquote {
+  border-left: none;
+}
+
+/* Debut Section Sidebar*/
+#barrecote {
+  position: fixed;
+  z-index: 1;
+  width: 250px;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #202933, #11161C);
+  font-family: Garamond, sans-serif;
+}
+
+#barrecote ul li {
+  position: relative;
+  padding: 30px 30px 30px 10px;
+  color: #197EE8;
+  opacity: 0.95;
+}
+
+.liens {
+  font-size: 20px;
+  height: 68%;
+  border-bottom: 1px solid gray;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.lien::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width .3s;
+}
+
+.lien:hover {
+  cursor: pointer;
+}
+
+.lien:hover::after {
+  width: 100%;
+  transition: width .3s;
+}
+
+.lien {
+  margin-top: 5px;
+}
+
+#aboutBtn {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+  font-size: 17px;
+  color: grey;
+}
+#aboutBtn:hover{
+  color: white;
+  cursor: pointer;
+}
+
+#rechercheBtn {
+  padding: 6px 10px;
+  background-color: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor:pointer;
+}
+
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  font-family: Garamond, sans-serif;
+}
+
+    /*Pour le bouton de nouveau courriel*/
+#nouveau {
+  margin: 10px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  height: 30px;
+  width: 160px;
+  box-shadow: 0px 6px 8px -7px #BDD1E7;
+  font-weight: bold;
+  color: #CAE4FF;
+}
+
+#nouveau:hover {
+  background-color: #0A7CF3;
+  border: 3px solid #51565C
+}
+
+#nouveau:active {
+  position:relative;
+  top:2px;
+}
+
+/*Top bar*/
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+#sous-titre {
+  font-size: 18px;
+  padding: 10px;
+  font-weight: normal;
+  color: #197EE8;
+}
+
+#title_search{
+  margin-bottom: 20px;
+  color: #2E3647;
+  font-family: Impact, Charcoal, sans-serif;
+  font-style: italic;
+  background-image: linear-gradient(to right, #4065B7, #6693F4);
+  margin-bottom: 5px;
+}
+
+.titre {
+  font-size: 48px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+}
+/*Fin Section Sidebar*/
+
+/*Debut Fonction "Nouveau Message"*/
+.boite {
+  display: flex;
+  border: 1px #4F5B43 solid;
+  border-style: double;
+  border-radius: 4px;
+  margin-bottom: 3px;
+  background-image: linear-gradient(to right,#7488AE, #8298C2);
+}
+
+.button {
+  margin: 10px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  height: 30px;
+  width: 160px;
+  box-shadow: 0px 6px 8px -7px #BDD1E7;
+  font-weight: bold;
+  color: #CAE4FF;
+}
+
+.buttons {
+  text-align:center;
+}
+
+.button1 {
+  margin: 10px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  height: 30px;
+  width: 160px;
+  box-shadow: 0px 6px 8px -7px #BDD1E7;
+  font-weight: bold;
+  color: #CAE4FF;
+}
+
+.button2 {
+  color: #008CBA;
+  background-color: white;
+  border: 2px solid #008CBA;} /* Blue */
+  .button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+.button3 {
+  color: #f44336;
+  background-color: white;
+  border: 2px solid #f44336;} /* Red */
+  .button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.button4 {
+  color: #cc6600;
+  background-color: white;
+  border: 2px solid #cc6600;} /* Blue */
+  .button4:hover {
+  background-color: #cc6600;
+  color: white;
+}
+
+#champsDest {
+  text-decoration: none;
+  list-style: none;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.close {
+  color: #a6a6a6;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.entree {
+  width: 300px;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1;
+  padding-top: 100px;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /*Scroll if needed*/
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto; /* Full width */
+  width: 50%;
+  border: 1px solid #888;
+  animation-name: boxopen;
+  animation-duration: 0.6s;
+}
+
+.modal-header {
+  background-color: #1B4067;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  font-family: "Courier New";
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.modal-destination {
+  flex-direction: column;
+}
+
+.modal-text {
+  width: calc(100% - 55px);
+  height: 100px;
+  margin: 0px 30px 0px 25px;
+  resize: none;
+}
+
+.modal-footer {
+  text-align: right;
+  padding-right: 5px;
+}
+
+#recipients input {
+  width: 75%;
+}
+
+.send:hover {
+  background-color: #989898;
+  text-emphasis: bold;
+}
+
+.to-obj {
+  display: inline-block;
+  width: 50px;
+  text-align: right;
+}​
+/*Fin Fonction "Nouveau Message"*/
+
+/*Debut Section "Carnet"*/
+
+#ajoutPersonne {
+  cursor:pointer;
+  color: #CAE4FF;
+  font-size: 11px;
+  padding: 2px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+}
+
+
+#ajoutPersonne:hover {
+  background-color: #0A7CF3;
+  border: 2px solid #51565C
+}
+
+#ajout_personne {
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  color: #CAE4FF;
+  font-size: 11px;
+  padding: 2px;
+}
+
+#ajout_personne:hover {
+  background-color: #0A7CF3;
+  border: 2px solid #51565C
+}
+
+#annulerBtn {
+  background-color: #b30000;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  color: #CAE4FF;
+  font-size: 11px;
+  padding: 2px;
+}
+
+#annulerBtn:hover {
+  background-color: #0A7CF3;
+  border: 2px solid #51565C
+}
+
+.btnNew {
+  background-color: #B3D90E;
+  color: black;
+  border: 1px solid #4F5B43;
+  border-radius: 2px;
+}
+
+.bouton_NewContact {
+  margin: 10px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  height: 35px;
+  width: 160px;
+  font-weight: bold;
+  color: #CAE4FF;
+  font-size: 11px;
+}
+.boutonRed {
+  background-color: #b30000 !important;
+}
+.boutonSmall  {
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 1px solid #4C5763;
+  cursor:pointer;
+  height: 21px;
+  width: 80px;
+  font-weight: bold;
+  font-size: 11px;
+  color: #CAE4FF;
+  margin-right: 2px;
+  align-content: center;
+  vertical-align: middle;
+  padding-bottom: 10px;
+}
+
+.boutonSmall:hover {
+  background-color: #0A7CF3;
+  border: 2px solid #51565C
+}
+
+#contacts_Prenom {
+  color: #34383E;
+  padding-left: 5px;
+  font-size: 22px;
+  position: relative;
+  width: 24%;
+  line-height: 26px;
+  text-align: center;
+}
+
+#contacts_Famille {
+  color: #34383E;
+  font-size: 22px;
+  position: relative;
+  text-align: center;
+  line-height: 26px;
+  width: 24%;
+}
+
+#contacts_Courriel {
+  color: #34383E;
+  font-size: 22px;
+  position: relative;
+  text-align: center;
+  line-height: 26px;
+  width: 24%;
+}
+
+#contacts_Operations {
+  color: #34383E;
+  font-size: 22px;
+  position: relative;
+  text-align: center;
+  line-height: 26px;
+  width: 24%;
+}
+
+#h1Carnet {
+  color: #2E3647;
+  font-family: Impact, Charcoal, sans-serif;
+  font-style: italic;
+  background-image: linear-gradient(to right, #4065B7, #6693F4);
+  margin-bottom: 5px;
+}
+
+#h2Contact {
+  background-image: linear-gradient(to right,#7488AE, #8298C2);
+  font-size: 23px;
+  font-family: Garamond;
+  width: 96px;
+  padding: 5px;
+  border-style: double;
+  border-radius: 5px;
+  border-color: #4F5B43;
+  color: #34383E;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.messageButton {
+  background-color: #003399;
+  border-radius: 4px;
+  border: 2px solid #4C5763;
+  color: #CAE4FF;
+  cursor:pointer;
+  font-size: 18px;
+  font-family: Garamond;
+  width: 100%;
+}
+
+.messageButton:hover {
+  background-color: #78a8db;
+}
+
+#msgSupprBTN {
+  margin: 10px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  height: 35px;
+  width: 200px;
+  font-weight: bold;
+  color: #CAE4FF;
+  font-size: 14px;
+  box-shadow: 0px 6px 8px -7px #BDD1E7;
+}
+
+#nouveauContact {
+  display: none;
+  background-image: linear-gradient(to right,#7488AE, #8298C2);
+  color: #374154;
+  width: 300px;
+  margin-top : 15px;
+  margin-bottom : 20px;
+  border: 1px black solid;
+  border-color: #4F5B43;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 19px;
+}
+
+p.subject{
+  border-style: solid;
+  border-color: #262626;
+}
+
+#receptionBTN {
+  margin: 10px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  height: 35px;
+  width: 200px;
+  font-weight: bold;
+  color: #CAE4FF;
+  font-size: 14px;
+  box-shadow: 0px 6px 8px -7px #BDD1E7;
+}
+
+#result_details {
+  border: 1px black solid;
+  border-color: #4F5B43;
+  color: #374154;
+  float: left;
+  width: 67%;
+  height: 80%;
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom,#7488AE, #8298C2);
+  white-space: pre-line;
+  padding: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  overflow: auto;
+}
+
+.userEntry {
+  background-image: linear-gradient(to right, #697284, #5A6882);
+}
+/*Fin Section "Carnet"*/
+
+
+/*Debut Fonction "Recherche"*/
+.contenu {
+  position: relative;
+  width: 100%;
+  margin-left: 250px;
+  padding: 20px;
+  font-size: 25px;
+  background-image: linear-gradient(to right, #242936, #3A4254);
+}
+
+#courriel {
+  list-style-type:none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#h1recherche {
+  color: #2E3647;
+  font-family: Impact, Charcoal, sans-serif;
+  font-style: italic;
+  background-image: linear-gradient(to right, #4065B7, #6693F4);
+  margin-bottom: 5px;
+}
+
+#ma_recherche {
+  padding: 6px;
+  margin: 8px 0px 0px 8px;
+  font-size: 17px;
+  border: none;
+}
+
+#result_list {
+  border: 1px black solid;
+  border-color: #4F5B43;
+  border-radius: 3px;
+  color: #374154;
+  margin-right: 20px;
+  float: left;
+  width: 25%;
+  height: 80%;
+  background-image: linear-gradient(to bottom,#7488AE, #8298C2);
+  white-space: pre-line;
+  padding: 5px;
+  overflow: auto;
+}
+
+#result_list > * {
+  color: rgb(90, 85, 57);
+  font-size: 10pt;
+  font-family: 'Times New Roman', Times, serif;
+  list-style-type:none;
+  cursor: pointer;
+}
+
+#result_list ul:hover {
+  background-color: #b6cbed;
+}
+
+#searchresult {
+  font-family: "Helvetica", sans-serif;
+  font-size: 14pt;
+  height: 100%;
+}
+/*Fin Fonction "Recherche"*/
+
+/*Debut Section "A Propos"*/
+#credits {
+  border: 1px #4F5B43 solid;
+  border-style: double;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 3px;
+  background-image: linear-gradient(to right,#7488AE, #8298C2);
+  list-style: none;
+  color: #34383E;
+}
+
+#h1propos {
+  color: #2E3647;
+  font-family: Impact, Charcoal, sans-serif;
+  font-style: italic;
+  background-image: linear-gradient(to right, #4065B7, #6693F4);
+  margin-bottom: 5px;
+}
+
+/*Fin Section "A Propos"*/
+
+/*Debut Section Inbox*/
+#inbox {
+  display: flex;
+}
+
+#boite_complete {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.menu {
+  position: relative;
+  width: 100%;
+  height: 5%;
+}
+
+.header{
+  position: relative;
+  width: 100%;
+  height: 45%;
+  display: block;
+  overflow: auto;
+  border: 1px #4F5B43 solid;
+  border-style: double;
+  border-radius: 4px;
+  margin-bottom: 3px;
+  background-image: linear-gradient(to right,#7488AE, #8298C2);
+}
+
+.header p:hover{
+  color: #FD6840;
+  cursor: pointer;
+}
+
+.content{
+  position: relative;
+  width: 100%;
+  height: 45%;
+  overflow: auto;
+  white-space: pre-wrap;
+  border: 1px #4F5B43 solid;
+  border-style: double;
+  border-radius: 4px;
+  margin-bottom: 3px;
+  background-image: linear-gradient(to right,#7488AE, #8298C2);
+}
+
+#make_list {
+  margin-left: 250px;
+  position: fixed;
+  width: 50%;
+  height: 100%;
+}
+/*Fin Section Inbox*/
+
+@keyframes boxopen {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
