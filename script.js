@@ -28,6 +28,42 @@ $(document).ready(function(){
     // La recherche permet de chercher un ou plusieurs mots dans tous les courriels stockés
 
     $("#rechercheBtn").click( function(e) {
+        $.ajax({
+            url: "/courriels",
+            contentType: "application/json",
+            // Default methode is GET, no need to specify here
+            success: function(response){
+                var courriels = response;
+                        //Génère la liste des courriels
+                $("#result_list").html("");
+                $("#result_list").animate({ scrollTop: 0 }, "fast");
+                if (mots_recherche[0] !== "") {
+                    for (var i = 0; i < courriels.length; i++){
+                        var my_array = Object.values(courriels[i]);
+                        var array_match = [];
+                        for (var k = 0; k < mots_recherche.length; k++) {
+                            var temp_match = my_array.join("").match(RegExp(mots_recherche[k], "ig"))
+                            array_match.push(temp_match);
+                        }
+                        if (array_match[0] !== null){
+                            match = true;
+                            $("#result_list").append(
+                                "<ul id='result" + i + "'>" +
+                                "<li> Expéditeur :   " + surligne_texte(mots_recherche, courriels[i].from) + "</li>" +
+                                "<li> Destinataire : " + surligne_texte(mots_recherche, courriels[i].to) + "</li>" +
+                                "<li> Date :         " + surligne_texte(mots_recherche, courriels[i].date) + "</li>" +
+                                "<li> Objet :        " + surligne_texte(mots_recherche, courriels[i].subject) + "</li>" +
+                                "</ul>" +
+                                "<hr>"
+                            )
+                        }
+                    }
+                }
+                else {
+                    $("#title_search").text("Veuillez effectuer une recherche");
+                }
+            }
+        });
         e.preventDefault();
         $(".load").hide();
         var mots_recherche = $("#ma_recherche").val().split(" ");
@@ -37,35 +73,6 @@ $(document).ready(function(){
 
         var match = false;
 
-        //Génère la liste des courriels
-        $("#result_list").html("");
-        $("#result_list").animate({ scrollTop: 0 }, "fast");
-        if (mots_recherche[0] !== "") {
-            for (var i = 0; i < courriels.length; i++){
-                var my_array = Object.values(courriels[i]);
-                var array_match = [];
-                for (var k = 0; k < mots_recherche.length; k++) {
-                    var temp_match = my_array.join("").match(RegExp(mots_recherche[k], "ig"))
-                    array_match.push(temp_match);
-                };
-                console.log(array_match);
-                if (array_match[0] !== null){
-                    match = true;
-                    $("#result_list").append(
-                        "<ul id='result" + i + "'>" +
-                        "<li> Expéditeur :   " + surligne_texte(mots_recherche, courriels[i].from) + "</li>" +
-                        "<li> Destinataire : " + surligne_texte(mots_recherche, courriels[i].to) + "</li>" +
-                        "<li> Date :         " + surligne_texte(mots_recherche, courriels[i].date) + "</li>" +
-                        "<li> Objet :        " + surligne_texte(mots_recherche, courriels[i].subject) + "</li>" +
-                        "</ul>" +
-                        "<hr>"
-                    )
-                }
-            }
-        }
-        else {
-            $("#title_search").text("Veuillez effectuer une recherche");
-        }
 
         $("#result_details").html("");
 
@@ -82,7 +89,7 @@ $(document).ready(function(){
                 "<li> Objet :        " + surligne_texte(mots_recherche, courriels[premier_resultat].subject) + "</li>" +
                 "</ul>" +
                 "<hr>" +
-                "<p>" +                  surligne_texte(mots_recherche, courriels[premier_resultat].body) + "</p>"
+                "<p>" +                  surligne_texte(mots_recherche, courriels[premier_resultat].body.join("")) + "</p>"
             );
         };
 
@@ -92,26 +99,34 @@ $(document).ready(function(){
         //Quand on clique sur un courriel de la liste pour afficher les détails
         $("#result_list").on("click", "ul", function() {
             var element_num = $(this).attr('id')[6];
-            $("#result_list ul").css({'background-color': '#8298C2'});
-            $("#result" + element_num).css({'background-color': '#b6cbed'});
-            $("#result_list ul").hover(function() {
-                $("#result_list ul").css({'background-color': '#8298C2'});
-                $("#result" + element_num).css({'background-color': '#b6cbed'});
-                $(this).css('background-color','#b6cbed')
-              });
-            if (mots_recherche[0] !== "") {
-                $("#result_details").html("");
-                $("#result_details").append(
-                    "<ul id='courriel'>" +
-                    "<li> Expéditeur :   " + surligne_texte(mots_recherche, courriels[element_num].from) + "</li>" +
-                    "<li> Destinataire : " + surligne_texte(mots_recherche, courriels[element_num].to) + "</li>" +
-                    "<li> Date :         " + surligne_texte(mots_recherche, courriels[element_num].date) + "</li>" +
-                    "<li> Objet :        " + surligne_texte(mots_recherche, courriels[element_num].subject) + "</li>" +
-                    "</ul>" +
-                    "<hr>" +
-                    "<p>" +                  surligne_texte(mots_recherche, courriels[element_num].body) + "</p>"
-                );
-            }
+            $.ajax({
+                url: "/courriels",
+                contentType: "application/json",
+                // Default methode is GET, no need to specify here
+                success: function(response){
+                    var courriels = response;
+                    $("#result_list ul").css({'background-color': '#8298C2'});
+                    $("#result" + element_num).css({'background-color': '#b6cbed'});
+                    $("#result_list ul").hover(function() {
+                        $("#result_list ul").css({'background-color': '#8298C2'});
+                        $("#result" + element_num).css({'background-color': '#b6cbed'});
+                        $(this).css('background-color','#b6cbed')
+                    });
+                    if (mots_recherche[0] !== "") {
+                        $("#result_details").html("");
+                        $("#result_details").append(
+                            "<ul id='courriel'>" +
+                            "<li> Expéditeur :   " + surligne_texte(mots_recherche, courriels[element_num].from) + "</li>" +
+                            "<li> Destinataire : " + surligne_texte(mots_recherche, courriels[element_num].to) + "</li>" +
+                            "<li> Date :         " + surligne_texte(mots_recherche, courriels[element_num].date) + "</li>" +
+                            "<li> Objet :        " + surligne_texte(mots_recherche, courriels[element_num].subject) + "</li>" +
+                            "</ul>" +
+                            "<hr>" +
+                            "<p>" +                  surligne_texte(mots_recherche, courriels[element_num].body.join("")) + "</p>"
+                        );
+                    }
+                }
+            });        
         });
     });
 

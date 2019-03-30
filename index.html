@@ -1,0 +1,169 @@
+<!-- Membres de l'équipe : -->
+<!-- Simon-Pierre Fortin -->
+<!-- Alexandre Jolicoeur -->
+<!-- Lindsay Radford -->
+<!-- Michèle Mouafo -->
+
+<!doctype html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SailBox</title>
+    <script src="courriels.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">   
+</head>
+
+<body>
+
+<!-- DEBUT FONCTION "NOUVEAU MESSAGE" -->
+  <div id="box" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&#10006;</span>
+            <h2>CRÉER UN MESSAGE</h2>
+        </div> <!-- .modal-header ; header avec logo + close -->
+        <form id="recipients" action="#">
+            <div class="buttons">
+              <button id="ENVOYER" type="submit" class="button buttons button2">ENVOYER</button>
+              <button id="SAUVEGARDER" type="button" class="button buttons button4">SAUVEGARDER</button>
+              <button id="ABANDONNER" type="reset" class="button buttons button3">ABANDONNER</button>
+            </div> <!-- .buttons -->
+            <div class="modal-destination">
+              <ul id="champsDest">
+                <li><a href="#" class="to-obj"><label for="recipientsto">A :</label></a> <input class="entree" type="text" id="receveur" name="to" placeholder="Adresse courriel..." required></li>
+                <li><a href="#" class="to-obj"><label for="recipientsbbc">Bcc :</label></a> <input id="recipientsbbc" class="entree" type="text" name="bcc" placeholder="En c.c..."></li>
+                <li><a href="#" class="to-obj"><label for="recipientsobj">Sujet :</label></a> <input id="recipientsobj" class="entree" type="text" name="subject" placeholder="Entrer sujet..."></li>
+                </ul>
+            </div> <!-- .modal-destination ; to-bbc-object -->
+            <div id="texte" >
+                <textarea class="modal-text"></textarea>
+              </div> <!-- #texte ; texte -->
+            <div class="modal-footer">
+                <button id="send" type="submit" class="button button1 send fa fa-envelope">   Envoyer</button>
+          </form>
+              </div> <!-- .modal-footer ; style + 2e send -->
+    </div> <!-- .modal-content ; le contenu box -->
+  </div> <!-- .modal ; section box-->
+<!-- FIN FONCTION "NOUVEAU MESSAGE" -->
+
+<div class="contenant">
+
+<!-- DEBUT SECTION "SIDEBAR" -->
+  <div id="barrecote">
+    <h2 class="titre">SailBox</h2>
+    <h3 id="sous-titre">Service de courriel - Beta</h3>
+    <hr>
+      <button id="nouveau">Nouveau message</button>
+        <form id="recherche">
+          <input id="ma_recherche" type="search" placeholder="Rechercher..." required>
+          <button type="submit" id="rechercheBtn"><i class="fa fa-search"></i></button>
+         </form>
+            <ul class="liens">
+                <li class="lien" id="menuBtn" ><i style="font-size: 22px" class="fa fa-home">    Menu principal</i></li>
+                <li class="lien" id="inboxBtn" ><i style="font-size: 22px" class="fa fa-envelope">    Boite de réception</i></li>
+                <li class="lien" id="carnetBtn"><i style="font-size: 22px" class="fa fa-address-book">    Carnet d'adresses</i></li>
+              <span id="aboutBtn" class="fa fa-arrow-circle-right">   À propos</span>
+            </ul>
+      </div>
+<!-- FIN SECTION "SIDEBAR" -->
+
+<!-- DEBUT FONCTION "RECHERCHE" -->
+  <div class="contenu" id="principal">
+    <div class="load" id="msgBienvenue">
+      <h2>Bienvenue au service de courriel SailBox!</h2>
+      <img id="Bienvenue" src="sailbox.png" alt="logoMailbox">
+    </div>
+      <div class="load" id="searchresult">
+        <h1 id="h1recherche">Recherche dans les courriels</h1>
+        <h4 id="title_search">Résultat de recherche</h1>
+        <div id="result_list">
+        </div>
+        <div id="result_details">
+      </div>
+    </div>
+<!-- FIN FONCTION "RECHERCHE" -->
+
+<!-- DEBUT SECTION "INBOX" -->
+  <div class="load" id="inbox">
+    <div id="boite_complete">
+      <div class="sidebar">
+          <button type="button" id="receptionBTN" class="btn btn-default btn-lg btn-block">Boite de Réception</button>
+          <button type="button" id="msgSupprBTN" class="btn btn-default btn-lg btn-block">Messages Supprimés</button>
+        </div>
+      <div id="make_list">
+        <div class="menu">
+          <button type="button" id="inboxNouveau" class="btn btn-default btn-md">Nouveau Message</button>
+          <button type="button" id="delBtn" class="btn btn-danger btn-md">Supprimer</button>
+          </div>
+        <div class="header">
+          </div>
+        <div class="break">
+          </div>
+        <div class="content">
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- FIN FONCTION "INBOX" -->
+
+<!-- DEBUT SECTION "CARNET" -->
+  <div class="load" id="carnet">
+    <h1 id="h1Carnet">----Carnet d'adresse----</h1>
+      <h2 id="h2Contact">Contacts</h2>
+        <div class="boite">
+            <!--Liste de contact (prenoms)-->
+        <div id="contacts_Prenom">Prenom</div>
+        <div id="contacts_Famille">Nom de Famille</div>
+        <div id="contacts_Courriel">Adresse Courriel</div>
+        <div id="contacts_Operations">Opérations </div>
+          </div>
+            <!--Fin liste de contact-->
+            <button id="affiche_ajoutBtn" class="bouton_NewContact">Ajouter un nouveau contact </button>
+        <div id="nouveauContact">
+          <form name="newcontact">
+              Prénom : <input type="text" name="prenom" class="userEntry"><br>
+              Nom de famille : <input type="text" name="nomfamille" class="userEntry"><br>
+              Adresse courriel : <input type="text" name="courriel" class="userEntry"><br>
+              <input type="button" id="ajout_personne" value="Ajouter">
+              <input type="button" id="annulerBtn" value="Annuler">
+            </form>
+          </div>
+      </div>
+<!-- DEBUT SECTION "CARNET" -->
+
+<!-- DEBUT SECTION "A PROPOS" -->
+  <div class="load" id="about">
+    <h1 id="h1propos">----Un projet réalisé par:----</h1>
+      <ul id="credits">
+        <li>Simon-Pierre Fortin</li>
+        <blockquote id="quote1">
+          <em>«Exige beaucoup de toi-même et attends peu des autres. Ainsi beaucoup d'ennuis te seront épargnés.»</em>
+          <footer style="color: black">Confucius</footer></blockquote>
+        <li>Alexandre Jolicoeur</li>
+        <blockquote id="quote2">
+          <em>«Dans la vengeance et en amour, la femme est plus barbare que l'homme.»</em>
+          <footer style="color: black">Friedrich Nietzsche</footer></blockquote>
+        <li>Lindsay Radford</li>
+        <blockquote id="quote3">
+          <em>«La science peut expliquer l'univers sans avoir besoin d'un créateur.»</em>
+          <footer style="color: black">Stephen Hawking</footer></blockquote>
+        <li>Michèle Mouafo</li>
+        <blockquote id="quote4">
+          <em>«Mieux vaut tête bien faite que tête bien pleine.»</em>
+          <footer style="color: black">Michel de Montaigne</footer></blockquote>
+      </ul>
+    </div>
+<!-- FIN SECTION "A PROPOS" -->
+
+</div>
+<!--contenant; ligne 50-->
+
+</body>
+</html>
