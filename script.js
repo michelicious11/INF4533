@@ -29,7 +29,7 @@ $(document).ready(function(){
 
     $("#rechercheBtn").click( function(e) {
         $.ajax({
-            url: "/courriels",
+            url: "/getLetters",
             contentType: "application/json",
             // Default methode is GET, no need to specify here
             success: function(response){
@@ -100,7 +100,7 @@ $(document).ready(function(){
         $("#result_list").on("click", "ul", function() {
             var element_num = $(this).attr('id')[6];
             $.ajax({
-                url: "/courriels",
+                url: "/getLetters",
                 contentType: "application/json",
                 // Default methode is GET, no need to specify here
                 success: function(response){

@@ -9,7 +9,7 @@ app.use(express.static(__dirname));
 app.use(bodyParser.json());
 
 
-app.get("/courriels", function(req, res){
+app.get("/getLetters", function(req, res){
     fs.readFile("data/courriels.json", function (err, data) {
         if (err) throw err;
         res.json(JSON.parse(data));
