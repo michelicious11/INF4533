@@ -5,6 +5,61 @@
 * Michèle Mouafo
 */
 
+
+// -- Nouvelles fonctions pour Projet 2 ---
+
+
+/*  Génère une paire de clé publique/privée RSA
+    Retourne un objet JSON : {myPublicKey: "clé publique", myPrivateKey : "clé privée"}
+*/
+var generate_keys = function(){
+    var key = new NodeRSA({b: 1024});
+    var keyPair = key.generateKeyPair(1024);
+    var myPrivateKey = keyPair.exportKey("private");
+    var myPublicKey = keyPair.exportKey("private");
+    return {myPublicKey: myPublicKey, myPrivateKey: myPrivateKey};
+};
+
+
+/*  Fonction de chiffrement RSA
+    Arguments: message(objet JSON ou String), key(une clé publique PEM)
+    retourne un String en base64
+*/
+var encrypt_message = function(message, mykey){
+    var cryptedMessage;
+    var key = new NodeRSA(mykey);
+    if (typeof message === "object"){
+        cryptedMessage = key.encrypt(JSON.stringify(message)).toString("base64");
+        return cryptedMessage;
+    }
+    else {
+        cryptedMessage = key.encrypt(message).toString("base64");
+        return cryptedMessage;
+    }
+};
+
+
+/*  Fonction de déchiffrement RSA
+    Arguments: message(String en base64), key(une clé privée PEM)
+    retourne un String en base64 ou un objet JSON selon le type de message initial
+*/
+var decrypt_message = function(message, mykey) {
+    var key = new NodeRSA(mykey);
+    var decryptedMessage = key.decrypt(message);
+    try {
+        decryptedMessage = JSON.parse(decryptedMessage.toString("utf-8"));
+        return decryptedMessage;
+    }
+    catch (err){
+        decryptedMessage = decryptedMessage.toString("utf-8");
+        return decryptedMessage;
+    } 
+};
+
+
+// --- Fin des nouvelles fonctions pour Projet 2 ---
+
+
 // Fonction utilisée pour surligner le texte obtenu par la recherche dans les courriels
 
 var surligne_texte = function(mots, texte){
@@ -18,6 +73,7 @@ var surligne_texte = function(mots, texte){
 };
 
 $(document).ready(function(){
+    
 
     $(".load").hide();
     $(".load").css({"visibility":"visible"});
