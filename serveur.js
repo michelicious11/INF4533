@@ -8,6 +8,8 @@ var PORT = process.env.PORT || 8888;
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 
+app.use('/favicon.ico', express.static('favicon.ico'));
+
 
 app.get("/getLetters", function(req, res){
     fs.readFile("data/courriels.json", function (err, data) {
