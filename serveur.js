@@ -17,5 +17,23 @@ app.get("/getLetters", function(req, res){
 });
 
 app.listen(PORT, function() {
-    console.log("Server listening on port " + PORT);
+    console.log("Server listening for client on port " + PORT);
 });
+
+var server    = app.listen(3033);
+var io        = require('socket.io').listen(server);
+
+// var connect_socket = io.connect("Adresse IP de connexion");
+// connect_socket.emit("envoi", data);
+
+// oi.on("envoi", function(data){
+//  faire qq chose ici
+// });
+
+io.sockets.on('connection', function (socket) {
+    console.log("Made socket connection from ", socket.address());
+
+    socket.on("envoi", function(data){
+        io.sockets.emit("envoi", data); // pas la bonne fonction pour l'instant
+    });
+  });
