@@ -316,7 +316,7 @@ var liste_carnet = function (){
         $("#contacts_Operations").append("<div id='contacts_Operations" + x +"'>"
         + "<input type='button' class='boutonSmall' onclick='document.getElementById(\"receveur\").value=carnet_contacts["+x+"][\"courriel\"];sendMSG()' value ='Écrire'>"
         + "<input type='button' class='boutonSmall boutonRed' onclick='carnet_contacts.splice("+x+", 1); liste_carnet();' id='testnum" + x +"' value ='Supprimer'>"
-        + "<input type='button' class='boutonSmall' onclick='showPublicKey(" + x + ")' id='stysts" + x + "' value ='lol'>" );
+        + "<input type='button' class='boutonSmall' onclick='showPublicKey(" + x + ")'  value ='Clef Publique'>" );
     }
 };
 
@@ -328,6 +328,7 @@ function showPublicKey(x) {
     $("#keyshare").html("");
     $("#keyshare").show();
     $("#keyshare").html("<pre>" + carnet_contacts[x]["clef_publique"] + "</pre>");
+    $("#keyshare").append("<button type=\"button\" class=\"boutonKey\" onclick =\"compact()\">Fermer</button>");
 }
 
 function compact() {
