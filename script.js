@@ -72,6 +72,12 @@ var surligne_texte = function(mots, texte){
     return temp_texte;
 };
 
+function getFormattedDate() {
+    var date = new Date();
+    var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    return str;
+}
+
 $(document).ready(function(){
 
     var monUser = "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQ\nGnWjWNqRd2iL/ujTNVEdfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQ==\n-----END PUBLIC KEY-----";
@@ -90,10 +96,13 @@ $(document).ready(function(){
     $("#rechercheBtn").click( function(e) {
         $.ajax({
             url: "/getLetters",
+            data: {
+                pem: monUser
+            },
             contentType: "application/json",
             // Default method is GET, no need to specify here
             success: function(response){
-                var courriels = response[monUser].emails;
+                var courriels = response.emails;
                         //Génère la liste des courriels
                 $("#result_list").html("");
                 $("#result_list").animate({ scrollTop: 0 }, "fast");
@@ -142,10 +151,13 @@ $(document).ready(function(){
             var element_num = $(this).attr('id')[6];
             $.ajax({
                 url: "/getLetters",
+                data:{
+                    pem: monUser
+                },
                 contentType: "application/json",
                 // Default methode is GET, no need to specify here
                 success: function(response){
-                    var courriels = response[monUser].emails;
+                    var courriels = response.emails;
                     $("#result_list ul").css({'background-color': '#8298C2'});
                     $("#result" + element_num).css({'background-color': '#b6cbed'});
                     $("#result_list ul").hover(function() {
