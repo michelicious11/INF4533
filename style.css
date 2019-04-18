@@ -362,18 +362,29 @@ hr {
   border-radius: 2px;
 }
 
-.bouton_NewContact {
-  margin: 10px;
+.boutonKey {
   background-color: #1B4067;
   border-radius: 10px;
-  border: 2px solid #4C5763;
+  border: 1px solid #4C5763;
   cursor:pointer;
-  height: 35px;
-  width: 160px;
+  height: 18px;
+  width: 80px;
   font-weight: bold;
-  color: #CAE4FF;
   font-size: 11px;
+  color: #CAE4FF;
+  margin-right: 2px;
+  align-content: center;
+  vertical-align: middle;
+  padding-bottom: 10px;
+  margin-left: 225px;
+  margin-bottom: 8px;
 }
+
+.boutonKey:hover {
+  background-color: #0A7CF3;
+  border: 2px solid #51565C
+}
+
 .boutonRed {
   background-color: #b30000 !important;
 }
@@ -451,13 +462,13 @@ hr {
 
 #keyshare {
   width: 550px;
-  height: 285px;
- background-image: linear-gradient(to right,#7488AE, #8298C2);
+  height: 140px;
+  background-image: linear-gradient(to bottom, #202933, #11161C);
   position: relative;
   left: 30%;
-  border-style: double;
+  border-style: solid;
   border-radius: 5px;
-  border-color: #4F5B43;
+  border-color: #0A7CF3;
   display: none;
 }
 
