@@ -191,7 +191,7 @@ $(document).ready(function(){
     //  ----- Début des fonctions des boutons -----
 
     init();
-
+    
     $("#nouveau").on("click", function(){
         $(".modal").css("display", "block");
     });
@@ -215,17 +215,6 @@ $(document).ready(function(){
         $(".champs").text("");
         liste_carnet();
         $("#carnet").show();
-    });
-
-    $("#affiche_ajoutBtn").click(function(){
-        var x = document.getElementById("nouveauContact");
-        x.style.display = "block";
-    });
-
-    $("#ajout_personne").click(function() {
-        ajout_contact();
-        $(".userEntry").val("");
-        compact();
     });
 
     $("#annulerBtn").click(function() {
@@ -261,37 +250,60 @@ $(document).ready(function(){
 
     //  ----- Début de la fonction du carnet -----
 
-var carnet = [{
-    prenom: "Bill",
-    nomFamille: "Clinton",
-    courriel: "billclinton@escargotexpress.com"
-},
-{
-    prenom: "Johanne",
-    nomFamille: "Lavertu",
-    courriel: "johannelavertu@escargotexpress.com"
 
-}];
+var carnet_contacts = [
+  {
+    "nom" : "Carmen Sandiego",
+    "courriel" : "stealth_gurl@sailbox.com",
+    "clef_privee" : "-----BEGIN RSA PRIVATE KEY-----\nMIIBOgIBAAJBAJSXevGXk8GffUi7uLNggmeIlq0iWT/oDzCCWN+v2O+yhEAUzjwR\nUrm+6GxOd0I1g6oHg3ZAyFXYRNtXW9ZRrOECAwEAAQJAeux1wLbsfRk7w5fITFxi\nhNPyEnh/7OZE6pRqgWIvzNpRqMm8WZX87o7lW2csAHI/WJ8i8wBbqYpOYR1szwEn\noQIhAOmTS+Ti4jpYUp2XVXSi2ZNUlP3H5Zw6QaxFp6GvgnojAiEAott/CZenCY0l\n7+Wl1TgNoe/9x/c+9fesiyiTJDPQQysCIQDkHYPgfSjePIYq/LJr3+PIPLHqDEEV\ny9t5qOlnQiaWqwIgRPkJOJrN17G723o7Xa47t9XYeZQxSiL3JIiuqKp5DbkCIHCJ\nDurqPMnOaTr9WcBP1hD+kZWAEVyc8y/1tfZubPa7\n-----END RSA PRIVATE KEY-----",
+    "clef_publique" : "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJSXevGXk8GffUi7uLNggmeIlq0iWT/o\nDzCCWN+v2O+yhEAUzjwRUrm+6GxOd0I1g6oHg3ZAyFXYRNtXW9ZRrOECAwEAAQ==\n-----END PUBLIC KEY-----"
+  },
+
+  {
+    "nom" : "Celine Dion",
+    "courriel" : "bignosebigvoice@sailbox.com",
+    "clef_privee" : "-----BEGIN RSA PRIVATE KEY-----\nMIIBPAIBAAJBAKgus2KXPTd0JjW9J32OLZ81sLWjaGIHtMXS0PLpa//RerVIKyiW\nM5os2M33Zj2cdRzH5acuCfb7f/6M6AH0SaUCAwEAAQJAPMiUIL/UaiRaYvW4PhKS\nvoXjFeK3KSbr2Mt2pTRjyhLN+/YSAFi+zC8+bnMkbkrb7mBjG8uxCGqbtoBjuKHP\nQQIhAPE2wA8DwPAk2XJP0pxRIkYzcy7F+GmaTpq2BElucpKJAiEAsn3nexPVrveK\nfkYY/5pM5R9ICADNuvLeQ/i/U9aQpz0CIQDlAHCoEI08sA9MymGODCz47uGcd1DW\nmSulD8bUHCpj2QIhAKD5XaepVsCqbVO+olL69Lh6wrq9Bs3AtWW108+npeO9AiEA\ntVEiWVRRvCeop4srick9u6LuSpIh1jQ5cWIetWOl0Uo=\n-----END RSA PRIVATE KEY-----",
+    "clef_publique" : "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKgus2KXPTd0JjW9J32OLZ81sLWjaGIH\ntMXS0PLpa//RerVIKyiWM5os2M33Zj2cdRzH5acuCfb7f/6M6AH0SaUCAwEAAQ==\n-----END PUBLIC KEY-----"
+  },
+
+  {
+    "nom" : "Hillary Clinton",
+    "courriel" : "workemail@sailbox.com",
+    "clef_privee" : "-----BEGIN RSA PRIVATE KEY-----\nMIIBOwIBAAJBAKR9cgpdzoPxO02dsPbAaCVdqpwLfSnVGDU2j1XUna8hqCS1Y6ac\nWvrjSMvCBS888KP7FmRMydz4E2+m4VjacK0CAwEAAQJBAI7Zjrdn/hhh4EGop+2y\n7P8+WBNKevlgYbSc3GAK1KIo6LM8QCbgnIS38+kOOCYgGROg2mVsTQwtyGOZ0MgZ\nz3UCIQD+/Lv5i+Wv+i8kldfHsaY3JPlJPNJKLsfOtXxv7deWOwIhAKUksgxpajy+\nTZOiKECXtQkHpCG7bjMD9Ljkxz+Tpt43AiBRBU1VRbZ97Cj+nv4pXbFK5FyxgLnx\nCFxEujYH+rL98QIgakjiurBBqpSEEydDJsc8wXIEhZ0+wGCkaTb8sYNS2yMCIQCH\no0YqmGUtYatMqYarcWEeTwDP/es5f8100ZOYU0WLgw==\n-----END RSA PRIVATE KEY-----",
+    "clef_publique" : "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKR9cgpdzoPxO02dsPbAaCVdqpwLfSnV\nGDU2j1XUna8hqCS1Y6acWvrjSMvCBS888KP7FmRMydz4E2+m4VjacK0CAwEAAQ==\n-----END PUBLIC KEY-----"
+  },
+
+  {
+    "nom" : "Jason Bourne",
+    "courriel" : "mattdamon2@sailbox.com",
+    "clef_privee" : "-----BEGIN RSA PRIVATE KEY-----\nMIIBPAIBAAJBALpFyjnsyGcYgDQCrO5jUKDv551MKzinYqJGRob7GzbM5lI/z+zL\nxY37GsAI9SoYULM2pssXPPSohWbZXkzMse0CAwEAAQJBALewYwBEVEv2iVbA3LAp\nGDXc3tbraiPwTQAhtSMfNXMPZa4c63wFZhStO8xaqV+AzXdmyg5auNmsqsPAu83f\n4wECIQDf8n6gFMEUDB6g2hXNj3z5ne7pTjhySxJj2iVQhlwvnQIhANTu4j+Cqv/+\nKgyQkdzLGShfZmCynKDIpsw5pfhDiIKRAiBkJTHA7mcFSwIrVjsnyIHPsnOTO1p8\nqduYcYX8Q4lX9QIhAMLBM4JvW0QFDiSr3h2aTYpVp2fuNcABhj3oxFrMOgFhAiEA\n3jVk7hFOYLclK7V9ts5YAZVIVhkWlJq5fxE5GyAMfsw=\n-----END RSA PRIVATE KEY-----",
+    "clef_publique" : "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALpFyjnsyGcYgDQCrO5jUKDv551MKzin\nYqJGRob7GzbM5lI/z+zLxY37GsAI9SoYULM2pssXPPSohWbZXkzMse0CAwEAAQ==\n-----END PUBLIC KEY-----"
+  },
+
+  {
+    "nom" : "Johnny Coiffeur",
+    "courriel" : "coiffurejohnny@sailbox.com",
+    "clef_privee" : "-----BEGIN RSA PRIVATE KEY-----\nMIIBOgIBAAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQGnWjWNqRd2iL/ujTNVEd\nfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQJASjClCgUorx7Y0DhjU8Xy\n1y/mKrcnQGCDrRpgVWp8xzv8Ca+KeBoxqJIqtwFw41gbDTwIdXa9Gvo6aUyJ829c\nqQIhAPnTonlQJe00fJEzcEDdxJX1eCm+7TE4VFqTNsu6AOAdAiEAsPx1gm8fnop2\nvvMm6slMPUMJKuEDGCaf2X9tCFrK3asCIHggnJqKwIHr4A4N1udJ+9JDw3EHXpRx\nSpZ2/T0/Bla9AiAnP/W3dXlnqYFoG3h3/ShhNaqkzb3n7zjn/TBq9+ehfQIhAPAd\nTWeEv4ob1hzhHARJav4+SOQ/pYHdhsraWr+54Equ\n-----END RSA PRIVATE KEY-----",
+    "clef_publique" : "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQ\nGnWjWNqRd2iL/ujTNVEdfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQ==\n-----END PUBLIC KEY-----"
+  }
+];
 
 var suppWindow = true;
-
+var gungovitch = "caca";
 var liste_carnet = function (){
     $("#contacts_Prenom").html("Prénom");
     $("#contacts_Famille").html("Nom de Famille");
     $("#contacts_Courriel").html("Adresse Courriel");
     $("#contacts_Operations").html("Opérations");
-    for (var x = 0; x <carnet.length; x++) {
-        carnet[x].num =x;
-        $("#contacts_Prenom").append("<div id='contact_prenom" + x +"'>" + carnet[x].prenom + "</div>");
+    for (var x = 0; x <carnet_contacts.length; x++) {
+        $("#contacts_Prenom").append("<div id='contact_prenom" + x +"'>" + carnet_contacts[x]["nom"] + "</div>");
         $("#contact_prenom"+ x).css({"color": "#374154", "fontSize": "medium", "textAlign":"center"});
-        $("#contacts_Famille").append("<div id='contacts_Famille" + x +"'>" + carnet[x].nomFamille + "</div>");
-        $("#contacts_Famille"+ x).css({"color": "#374154", "fontSize": "medium", "textAlign":"center"});
-        $("#contacts_Courriel").append("<div id='contacts_Courriel" + x +"'>" + carnet[x].courriel + "</div>");
+        $("#contacts_Courriel").append("<div id='contacts_Courriel" + x +"'>" + carnet_contacts[x]["courriel"] + "</div>");
         $("#contacts_Courriel"+ x).css({"color": "#374154", "fontSize": "medium", "textAlign":"center"});
         $("#contacts_Operations").append("<div id='contacts_Operations" + x +"'>"
-        + "<input type='button' class='boutonSmall' onclick='document.getElementById(\"receveur\").value=carnet["+x+"].courriel;sendMSG()' value ='Écrire'>"
-        + "<input type='button'class='boutonSmall boutonRed' onclick='carnet.splice("+x+", 1); liste_carnet();' id='testnum" + x +"' value ='Supprimer'>");
-
+        + "<input type='button' class='boutonSmall' onclick='document.getElementById(\"receveur\").value=carnet_contacts["+x+"][\"courriel\"];sendMSG()' value ='Écrire'>"
+        + "<input type='button' class='boutonSmall boutonRed' onclick='carnet_contacts.splice("+x+", 1); liste_carnet();' id='testnum" + x +"' value ='Supprimer'>"
+        + "<input type='button' class='boutonSmall' onclick='compact(), $(\"#keyshare\").append(carnet_contacts.length)'; id='stysts' value ='lol'>" );
     }
 };
 
@@ -299,8 +311,10 @@ function sendMSG() {
   $(".modal").css("display", "block");
 }
 
+
+
 function compact() {
-    var x = document.getElementById("nouveauContact");
+    var x = document.getElementById("keyshare");
     if(x.style.display === "block") {
       x.style.display = "none";
     } else {
@@ -308,19 +322,6 @@ function compact() {
     }
 }
 
-
-function ajout_contact() {
-    var newcarnet = {};
-    newcarnet.prenom = document.newcontact.prenom.value;
-    newcarnet.nomFamille = document.newcontact.nomfamille.value;
-    newcarnet.courriel = document.newcontact.courriel.value;
-    if (Object.values(newcarnet)[0] === "" || Object.values(newcarnet)[1] === "" || Object.values(newcarnet)[2] === ""){
-        alert("Veuillez remplir tous les champs!");
-        return;
-    }
-    carnet.push(newcarnet);
-    liste_carnet();
-}
 
     //  ----- Fin de la fonction du carnet -----
 

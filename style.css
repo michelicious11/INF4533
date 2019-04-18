@@ -340,21 +340,6 @@ hr {
   border: 2px solid #51565C
 }
 
-#ajout_personne {
-  background-color: #1B4067;
-  border-radius: 10px;
-  border: 2px solid #4C5763;
-  cursor:pointer;
-  color: #CAE4FF;
-  font-size: 11px;
-  padding: 2px;
-}
-
-#ajout_personne:hover {
-  background-color: #0A7CF3;
-  border: 2px solid #51565C
-}
-
 #annulerBtn {
   background-color: #b30000;
   border-radius: 10px;
@@ -418,19 +403,11 @@ hr {
   padding-left: 5px;
   font-size: 22px;
   position: relative;
-  width: 24%;
+  width: 31%;
   line-height: 26px;
   text-align: center;
 }
 
-#contacts_Famille {
-  color: #34383E;
-  font-size: 22px;
-  position: relative;
-  text-align: center;
-  line-height: 26px;
-  width: 24%;
-}
 
 #contacts_Courriel {
   color: #34383E;
@@ -438,7 +415,7 @@ hr {
   position: relative;
   text-align: center;
   line-height: 26px;
-  width: 24%;
+  width: 31%;
 }
 
 #contacts_Operations {
@@ -447,7 +424,7 @@ hr {
   position: relative;
   text-align: center;
   line-height: 26px;
-  width: 24%;
+  width: 31%;
 }
 
 #h1Carnet {
@@ -470,6 +447,18 @@ hr {
   color: #34383E;
   margin-bottom: 8px;
   margin-top: 8px;
+}
+
+#keyshare {
+  width: 550px;
+  height: 285px;
+ background-image: linear-gradient(to right,#7488AE, #8298C2);
+  position: relative;
+  left: 30%;
+  border-style: double;
+  border-radius: 5px;
+  border-color: #4F5B43;
+  display: none;
 }
 
 .messageButton {
@@ -501,19 +490,6 @@ hr {
   box-shadow: 0px 6px 8px -7px #BDD1E7;
 }
 
-#nouveauContact {
-  display: none;
-  background-image: linear-gradient(to right,#7488AE, #8298C2);
-  color: #374154;
-  width: 300px;
-  margin-top : 15px;
-  margin-bottom : 20px;
-  border: 1px black solid;
-  border-color: #4F5B43;
-  border-radius: 4px;
-  padding: 3px;
-  font-size: 19px;
-}
 
 p.subject{
   border-style: solid;
