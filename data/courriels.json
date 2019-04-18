@@ -1,4 +1,40 @@
 {
+  "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJSXevGXk8GffUi7uLNggmeIlq0iWT/o\nDzCCWN+v2O+yhEAUzjwRUrm+6GxOd0I1g6oHg3ZAyFXYRNtXW9ZRrOECAwEAAQ==\n-----END PUBLIC KEY-----" : {
+    "user" : "Carmen Sandiego",
+    "emails": [
+
+    ]
+  }
+},
+
+{
+    "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKgus2KXPTd0JjW9J32OLZ81sLWjaGIH\ntMXS0PLpa//RerVIKyiWM5os2M33Zj2cdRzH5acuCfb7f/6M6AH0SaUCAwEAAQ==\n-----END PUBLIC KEY-----" : {
+    "user" : "Celine Dion",
+    "emails": [
+      
+    ]
+  }
+},
+
+{
+    "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKR9cgpdzoPxO02dsPbAaCVdqpwLfSnV\nGDU2j1XUna8hqCS1Y6acWvrjSMvCBS888KP7FmRMydz4E2+m4VjacK0CAwEAAQ==\n-----END PUBLIC KEY-----" : {
+    "user" : "Hillary Clinton",
+    "emails": [
+      
+    ]
+  }
+},
+
+{
+    "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALpFyjnsyGcYgDQCrO5jUKDv551MKzin\nYqJGRob7GzbM5lI/z+zLxY37GsAI9SoYULM2pssXPPSohWbZXkzMse0CAwEAAQ==\n-----END PUBLIC KEY-----" : {
+    "user" : "Jason Bourne",
+    "emails": [
+      
+    ]
+  }
+},
+
+{
   "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQ\nGnWjWNqRd2iL/ujTNVEdfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQ==\n-----END PUBLIC KEY-----": {
     "user": "Johnny Coiffeur",
     "emails": [
@@ -7,3 +43,4 @@
     ]
   }
 }
+
