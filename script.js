@@ -13,10 +13,10 @@
     Retourne un objet JSON : {myPublicKey: "clé publique", myPrivateKey : "clé privée"}
 */
 var generate_keys = function(){
-    var key = new NodeRSA({b: 1024});
-    var keyPair = key.generateKeyPair(1024);
+    var key = new NodeRSA({b: 512});
+    var keyPair = key.generateKeyPair(512);
     var myPrivateKey = keyPair.exportKey("private");
-    var myPublicKey = keyPair.exportKey("private");
+    var myPublicKey = keyPair.exportKey("public");
     return {myPublicKey: myPublicKey, myPrivateKey: myPrivateKey};
 };
 
@@ -73,7 +73,9 @@ var surligne_texte = function(mots, texte){
 };
 
 $(document).ready(function(){
-    
+
+    var monUser = "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQ\nGnWjWNqRd2iL/ujTNVEdfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQ==\n-----END PUBLIC KEY-----";
+    var maKeyPriv = "-----BEGIN RSA PRIVATE KEY-----\nMIIBOgIBAAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQGnWjWNqRd2iL/ujTNVEd\nfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQJASjClCgUorx7Y0DhjU8Xy\n1y/mKrcnQGCDrRpgVWp8xzv8Ca+KeBoxqJIqtwFw41gbDTwIdXa9Gvo6aUyJ829c\nqQIhAPnTonlQJe00fJEzcEDdxJX1eCm+7TE4VFqTNsu6AOAdAiEAsPx1gm8fnop2\nvvMm6slMPUMJKuEDGCaf2X9tCFrK3asCIHggnJqKwIHr4A4N1udJ+9JDw3EHXpRx\nSpZ2/T0/Bla9AiAnP/W3dXlnqYFoG3h3/ShhNaqkzb3n7zjn/TBq9+ehfQIhAPAd\nTWeEv4ob1hzhHARJav4+SOQ/pYHdhsraWr+54Equ\n-----END RSA PRIVATE KEY-----"; 
 
     $(".load").hide();
     $(".load").css({"visibility":"visible"});
@@ -83,19 +85,21 @@ $(document).ready(function(){
 
     // La recherche permet de chercher un ou plusieurs mots dans tous les courriels stockés
 
+    var match = false;
+
     $("#rechercheBtn").click( function(e) {
         $.ajax({
             url: "/getLetters",
             contentType: "application/json",
-            // Default methode is GET, no need to specify here
+            // Default method is GET, no need to specify here
             success: function(response){
-                var courriels = response;
+                var courriels = response[monUser].emails;
                         //Génère la liste des courriels
                 $("#result_list").html("");
                 $("#result_list").animate({ scrollTop: 0 }, "fast");
                 if (mots_recherche[0] !== "") {
                     for (var i = 0; i < courriels.length; i++){
-                        var my_array = Object.values(courriels[i]);
+                        var my_array = Object.values(decrypt_message(courriels[i], maKeyPriv));
                         var array_match = [];
                         for (var k = 0; k < mots_recherche.length; k++) {
                             var temp_match = my_array.join("").match(RegExp(mots_recherche[k], "ig"))
@@ -103,15 +107,16 @@ $(document).ready(function(){
                         }
                         if (array_match[0] !== null){
                             match = true;
+                            var courrielActuel = decrypt_message(courriels[i], maKeyPriv);
                             $("#result_list").append(
                                 "<ul id='result" + i + "'>" +
-                                "<li> Expéditeur :   " + surligne_texte(mots_recherche, courriels[i].from) + "</li>" +
-                                "<li> Destinataire : " + surligne_texte(mots_recherche, courriels[i].to) + "</li>" +
-                                "<li> Date :         " + surligne_texte(mots_recherche, courriels[i].date) + "</li>" +
-                                "<li> Objet :        " + surligne_texte(mots_recherche, courriels[i].subject) + "</li>" +
+                                "<li> Expéditeur :   " + surligne_texte(mots_recherche, courrielActuel.from) + "</li>" +
+                                "<li> Destinataire : " + surligne_texte(mots_recherche, courrielActuel.to) + "</li>" +
+                                "<li> Date :         " + surligne_texte(mots_recherche, courrielActuel.date) + "</li>" +
+                                "<li> Objet :        " + surligne_texte(mots_recherche, courrielActuel.subject) + "</li>" +
                                 "</ul>" +
                                 "<hr>"
-                            )
+                            );
                         }
                     }
                 }
@@ -127,27 +132,7 @@ $(document).ready(function(){
 
         $("#title_search").text("Résultat de recherche : « " + mots_recherche.join(" ") + " »");
 
-        var match = false;
-
-
         $("#result_details").html("");
-
-        //Détails du premier courriel affiché par défaut
-        if (mots_recherche[0] !== "" && match) {
-            var premier_resultat = $("#result_list ul").attr("id")[6];
-            $("#result" + premier_resultat).css({'background-color': '#b6cbed'});
-            $("#courriel").remove();
-            $("#result_details").append(
-                "<ul id='courriel'>" +
-                "<li> Expéditeur :   " + surligne_texte(mots_recherche, courriels[premier_resultat].from) + "</li>" +
-                "<li> Destinataire : " + surligne_texte(mots_recherche, courriels[premier_resultat].to) + "</li>" +
-                "<li> Date :         " + surligne_texte(mots_recherche, courriels[premier_resultat].date) + "</li>" +
-                "<li> Objet :        " + surligne_texte(mots_recherche, courriels[premier_resultat].subject) + "</li>" +
-                "</ul>" +
-                "<hr>" +
-                "<p>" +                  surligne_texte(mots_recherche, courriels[premier_resultat].body.join("")) + "</p>"
-            );
-        };
 
         //Affiche la div à l'utilisateur
         $("#searchresult").show();
@@ -160,7 +145,7 @@ $(document).ready(function(){
                 contentType: "application/json",
                 // Default methode is GET, no need to specify here
                 success: function(response){
-                    var courriels = response;
+                    var courriels = response[monUser].emails;
                     $("#result_list ul").css({'background-color': '#8298C2'});
                     $("#result" + element_num).css({'background-color': '#b6cbed'});
                     $("#result_list ul").hover(function() {
@@ -170,15 +155,16 @@ $(document).ready(function(){
                     });
                     if (mots_recherche[0] !== "") {
                         $("#result_details").html("");
+                        var courrielActuel = decrypt_message(courriels[element_num], maKeyPriv);
                         $("#result_details").append(
                             "<ul id='courriel'>" +
-                            "<li> Expéditeur :   " + surligne_texte(mots_recherche, courriels[element_num].from) + "</li>" +
-                            "<li> Destinataire : " + surligne_texte(mots_recherche, courriels[element_num].to) + "</li>" +
-                            "<li> Date :         " + surligne_texte(mots_recherche, courriels[element_num].date) + "</li>" +
-                            "<li> Objet :        " + surligne_texte(mots_recherche, courriels[element_num].subject) + "</li>" +
+                            "<li> Expéditeur :   " + surligne_texte(mots_recherche, courrielActuel.from) + "</li>" +
+                            "<li> Destinataire : " + surligne_texte(mots_recherche, courrielActuel.to) + "</li>" +
+                            "<li> Date :         " + surligne_texte(mots_recherche, courrielActuel.date) + "</li>" +
+                            "<li> Objet :        " + surligne_texte(mots_recherche, courrielActuel.subject) + "</li>" +
                             "</ul>" +
                             "<hr>" +
-                            "<p>" +                  surligne_texte(mots_recherche, courriels[element_num].body.join("")) + "</p>"
+                            "<p>" +                  surligne_texte(mots_recherche, courrielActuel.body) + "</p>"
                         );
                     }
                 }
