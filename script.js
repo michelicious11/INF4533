@@ -72,7 +72,7 @@ var surligne_texte = function(mots, texte){
     return temp_texte;
 };
 
-function getFormattedDate() {
+var getFormattedDate = function() {
     var date = new Date();
     var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     return str;
@@ -80,11 +80,18 @@ function getFormattedDate() {
 
 $(document).ready(function(){
 
-    var monUser = "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQ\nGnWjWNqRd2iL/ujTNVEdfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQ==\n-----END PUBLIC KEY-----";
-    var maKeyPriv = "-----BEGIN RSA PRIVATE KEY-----\nMIIBOgIBAAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQGnWjWNqRd2iL/ujTNVEd\nfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQJASjClCgUorx7Y0DhjU8Xy\n1y/mKrcnQGCDrRpgVWp8xzv8Ca+KeBoxqJIqtwFw41gbDTwIdXa9Gvo6aUyJ829c\nqQIhAPnTonlQJe00fJEzcEDdxJX1eCm+7TE4VFqTNsu6AOAdAiEAsPx1gm8fnop2\nvvMm6slMPUMJKuEDGCaf2X9tCFrK3asCIHggnJqKwIHr4A4N1udJ+9JDw3EHXpRx\nSpZ2/T0/Bla9AiAnP/W3dXlnqYFoG3h3/ShhNaqkzb3n7zjn/TBq9+ehfQIhAPAd\nTWeEv4ob1hzhHARJav4+SOQ/pYHdhsraWr+54Equ\n-----END RSA PRIVATE KEY-----"; 
+    var monUser = "";
+    var maKeyPriv = ""; 
 
     $(".load").hide();
     $(".load").css({"visibility":"visible"});
+
+    // Création du menu déroulant des utilisateurs
+    for (var j = 0; j < carnet_contacts.length; j++){
+        $("#user_list").append("<option value='" + j + "'>" + carnet_contacts[j]["nom"] + "</option>");
+        //$("#user_list").append("<option>" + carnet_contacts[j]["nom"] + "</option>");
+    }
+
     $("#msgBienvenue").show();
 
     //  ----- Début de la fonction de recherche -----
@@ -189,6 +196,14 @@ $(document).ready(function(){
     //  ----- Début des fonctions des boutons -----
 
     init();
+
+    $("#getUser").on("click", function(){
+        var userChoisi = $("#user_list option:selected").text();
+        $("#userChoisi").text("Utilisateur choisi! Bienvenue " + userChoisi + "!");
+        $("#msgPre").text("Merci! Vous pouvez changer d'utilisateur quand vous voulez");
+        monUser = carnet_contacts[$("#user_list option:selected").val()]["clef_publique"];
+        maKeyPriv = carnet_contacts[$("#user_list option:selected").val()]["clef_privee"];
+    });
     
     $("#nouveau").on("click", function(){
         $(".modal").css("display", "block");
