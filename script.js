@@ -222,9 +222,23 @@ $(document).ready(function(){
                     clef_dest = carnet_contacts[d]["clef_publique"];
                     nouveau_courriel_crypted = encrypt_message(nouveau_courriel, clef_dest);
                     colis_json = [{"dest": clef_dest, "msg": nouveau_courriel_crypted}];
-                }
-            }
+                    $.ajax({
+                        type: 'POST',
+                        url: '/addLetters',
+                        data: colis_json,
+                        success: function(){
+                            alert("success");
+                        },
+                        error: function(){
+                            alert("error")
+                        },
+                      
+                        
 
+                    });   
+                }
+            
+            };
             if (colis_json === ""){
                 alert("Adresse inconnue. Veuillez consulter le carnet d'adresses.");
             }
