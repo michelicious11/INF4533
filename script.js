@@ -199,7 +199,7 @@ $(document).ready(function(){
     init();
 
     $("#send").on("click", function(e){
-
+        if (document.getElementById("receveur").value != "" && document.getElementById("recipientsobj").value != "" && document.getElementById("modal_body").value != ""){
             var destinataire = document.getElementById("receveur").value;
             var dateActuelle = getFormattedDate();
             var objetCourriel = document.getElementById("recipientsobj").value;
@@ -217,6 +217,10 @@ $(document).ready(function(){
         $(".modal").css("display", "none");
         $(".entree").val("");
         $(".modal-text").val("");
+        }
+        else{
+            alert("Veuillez remplir tous les champs!");
+        }
     });
 
     $("#getUser").on("click", function(){
