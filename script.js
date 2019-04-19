@@ -198,12 +198,25 @@ $(document).ready(function(){
 
     init();
 
-    $("#send").on("click", function(){
-            const a = "\"to\"" + " : " + "\""+document.getElementById("receveur").value+"\"";
-            const b = "\"subject\"" + " : " +  "\""+document.getElementById("recipientsobj").value+"\"";
-            const c = "\"body\"" + " : " +  "\""+document.getElementById("modal_body").value+"\"";
-            var date = "\"Date\"" + " : " + getFormattedDate();
-            alert(a + "\n" + b + "\n" + c + "\n" + date + "\n" + userActuel);
+    $("#send").on("click", function(e){
+
+            var destinataire = document.getElementById("receveur").value;
+            var dateActuelle = getFormattedDate();
+            var objetCourriel = document.getElementById("recipientsobj").value;
+            var corpsCourriel = document.getElementById("modal_body").value;
+
+            var nouveau_courriel = {
+                "from": userActuel,
+                "to": destinataire,
+                "date": dateActuelle,
+                "subject": objetCourriel,
+                "body": corpsCourriel
+            };
+            console.log(nouveau_courriel);
+        e.preventDefault();
+        $(".modal").css("display", "none");
+        $(".entree").val("");
+        $(".modal-text").val("");
     });
 
     $("#getUser").on("click", function(){
@@ -212,7 +225,6 @@ $(document).ready(function(){
         $("#msgPre").text("Merci! Vous pouvez changer d'utilisateur quand vous voulez");
         monUser = carnet_contacts[$("#user_list option:selected").val()]["clef_publique"];
         maKeyPriv = carnet_contacts[$("#user_list option:selected").val()]["clef_privee"];
-        console.log(userActuel);
     });
     
     $("#nouveau").on("click", function(){
