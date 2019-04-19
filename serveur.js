@@ -1,3 +1,10 @@
+/* Membres de l'équipe :
+* Simon-Pierre Fortin
+* Alexandre Jolicoeur
+* Lindsay Radford
+* Michèle Mouafo
+*/
+
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
