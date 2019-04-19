@@ -226,14 +226,13 @@ $(document).ready(function(){
                         type: 'POST',
                         url: '/addLetters',
                         data: colis_json,
-                        success: function(){
-                            alert("success");
+                        success: function(response){
+                            alert(response);
                         },
                         error: function(){
                             alert("error")
-                        },
-                      
-                        
+                        }
+                         
 
                     });   
                 }

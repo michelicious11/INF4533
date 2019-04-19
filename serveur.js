@@ -27,6 +27,11 @@ app.get("/getLetters", function(req, res){
     res.send(my_obj[usedKey]);
 });
 
+app.post("/addLetters", function(req, res){
+res.send("Réponse courtoise");
+console.log(req);
+});  
+
 app.listen(PORT, function() {
     console.log("Serveur en attente de connexion du client sur le port " + PORT);
 });
