@@ -343,11 +343,11 @@ var liste_carnet = function (){
 };
 
 
-/* //fonction suspendue pour tests. Ferme la fenêtre d'envoi de message quand on clique send
-function sendMSG() { j'ai autre chose à faire que perdre mon temps avec quelqu'un qui cherche à se déresponsabiliser, se victimiser, pis donner un char de marde à tout le monde
+
+function sendMSG() { 
   $(".modal").css("display", "block");
 }
-*/
+
 
 function showPublicKey(x) {
     $("#keyshare").html("");
