@@ -204,6 +204,9 @@ $(document).ready(function(){
             var dateActuelle = getFormattedDate();
             var objetCourriel = document.getElementById("recipientsobj").value;
             var corpsCourriel = document.getElementById("modal_body").value;
+            var clef_dest;
+            var colis_json = "";
+            var nouveau_courriel_crypted;
 
             var nouveau_courriel = {
                 "from": userActuel,
@@ -212,11 +215,24 @@ $(document).ready(function(){
                 "subject": objetCourriel,
                 "body": corpsCourriel
             };
-            console.log(nouveau_courriel);
-        e.preventDefault();
-        $(".modal").css("display", "none");
-        $(".entree").val("");
-        $(".modal-text").val("");
+
+            console.log(destinataire);
+            for (var d = 0; d < carnet_contacts.length; d++){
+                if (destinataire === carnet_contacts[d]["courriel"]){
+                    clef_dest = carnet_contacts[d]["clef_publique"];
+                    nouveau_courriel_crypted = encrypt_message(nouveau_courriel, clef_dest);
+                    colis_json = [{"dest": clef_dest, "msg": nouveau_courriel_crypted}];
+                }
+            }
+
+            if (colis_json === ""){
+                alert("Adresse inconnue. Veuillez consulter le carnet d'adresses.");
+            }
+        
+            e.preventDefault();
+            $(".modal").css("display", "none");
+            $(".entree").val("");
+            $(".modal-text").val("");
         }
         else{
             alert("Veuillez remplir tous les champs!");
