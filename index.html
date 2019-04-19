@@ -44,7 +44,7 @@
                 </ul>
             </div> <!-- .modal-destination ; to-bbc-object -->
             <div id="texte" >
-                <textarea class="modal-text"></textarea>
+                <textarea class="modal-text" id="modal_body"></textarea>
               </div> <!-- #texte ; texte -->
             <div class="modal-footer">
                 <button id="send" type="submit" class="button button1 send fa fa-envelope">   Envoyer</button>
@@ -60,6 +60,11 @@
   <div id="barrecote">
     <h2 class="titre">SailBox</h2>
     <h3 id="sous-titre">Service de courriel - Beta</h3>
+    <h4>
+      <form>
+        <input type="text" id="textjson">  <input type="button" id="gojson" value="go">
+        </form>
+      </h4> 
     <hr>
       <button id="nouveau">Nouveau message</button>
         <form id="recherche">

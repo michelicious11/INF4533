@@ -197,6 +197,13 @@ $(document).ready(function(){
 
     init();
 
+    $("#send").on("click", function(){
+            const a = "\"to\"" + " : " + "\""+document.getElementById("receveur").value+"\"";
+            const b = "\"subject\"" + " : " +  "\""+document.getElementById("recipientsobj").value+"\"";
+            const c = "\"body\"" + " : " +  "\""+document.getElementById("modal_body").value+"\"";
+            alert(a + "\n" + b + "\n" + c);
+    });
+
     $("#getUser").on("click", function(){
         var userChoisi = $("#user_list option:selected").text();
         $("#userChoisi").text("Utilisateur choisi! Bienvenue " + userChoisi + "!");
@@ -320,9 +327,12 @@ var liste_carnet = function (){
     }
 };
 
-function sendMSG() {
+
+/* //fonction suspendue pour tests. Ferme la fenêtre d'envoi de message quand on clique send
+function sendMSG() { j'ai autre chose à faire que perdre mon temps avec quelqu'un qui cherche à se déresponsabiliser, se victimiser, pis donner un char de marde à tout le monde
   $(".modal").css("display", "block");
 }
+*/
 
 function showPublicKey(x) {
     $("#keyshare").html("");
