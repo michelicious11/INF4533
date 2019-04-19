@@ -346,12 +346,9 @@ var liste_carnet = function (){
     }
 };
 
-
-
-function sendMSG() { 
-  $(".modal").css("display", "block");
-}
-
+function sendMSG() {
+    $(".modal").css("display", "block");
+  }
 
 function showPublicKey(x) {
     $("#keyshare").html("");
