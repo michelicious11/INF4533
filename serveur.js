@@ -28,8 +28,9 @@ app.get("/getLetters", function(req, res){
 });
 
 app.post("/addLetters", function(req, res){
-res.send("Réponse courtoise");
-console.log(req);
+    var email = req.body;
+    res.send("Courriel reçu!");
+    console.log(email);
 });  
 
 app.listen(PORT, function() {

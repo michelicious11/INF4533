@@ -216,17 +216,17 @@ $(document).ready(function(){
                 "body": corpsCourriel
             };
 
-            console.log(destinataire);
             for (var d = 0; d < carnet_contacts.length; d++){
                 if (destinataire === carnet_contacts[d]["courriel"]){
                     clef_dest = carnet_contacts[d]["clef_publique"];
                     nouveau_courriel_crypted = encrypt_message(nouveau_courriel, clef_dest);
-                    colis_json = [{"dest": clef_dest, "msg": nouveau_courriel_crypted}];
+                    colis_json = {"dest": clef_dest, "msg": nouveau_courriel_crypted};
                     $.ajax({
                         type: 'POST',
                         url: '/addLetters',
-                        data: colis_json,
-                        success: function(response){
+                        contentType: "application/json",
+                        data: JSON.stringify(colis_json),
+                        success: function (response){
                             alert(response);
                         },
                         error: function(){
