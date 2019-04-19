@@ -81,7 +81,8 @@ var getFormattedDate = function() {
 $(document).ready(function(){
 
     var monUser = "";
-    var maKeyPriv = ""; 
+    var maKeyPriv = "";
+    var userActuel = "";
 
     $(".load").hide();
     $(".load").css({"visibility":"visible"});
@@ -201,15 +202,17 @@ $(document).ready(function(){
             const a = "\"to\"" + " : " + "\""+document.getElementById("receveur").value+"\"";
             const b = "\"subject\"" + " : " +  "\""+document.getElementById("recipientsobj").value+"\"";
             const c = "\"body\"" + " : " +  "\""+document.getElementById("modal_body").value+"\"";
-            alert(a + "\n" + b + "\n" + c);
+            var date = "\"Date\"" + " : " + getFormattedDate();
+            alert(a + "\n" + b + "\n" + c + "\n" + date + "\n" + userActuel);
     });
 
     $("#getUser").on("click", function(){
-        var userChoisi = $("#user_list option:selected").text();
-        $("#userChoisi").text("Utilisateur choisi! Bienvenue " + userChoisi + "!");
+        userActuel = $("#user_list option:selected").text();
+        $("#userChoisi").text("Utilisateur choisi! Bienvenue " + userActuel + "!");
         $("#msgPre").text("Merci! Vous pouvez changer d'utilisateur quand vous voulez");
         monUser = carnet_contacts[$("#user_list option:selected").val()]["clef_publique"];
         maKeyPriv = carnet_contacts[$("#user_list option:selected").val()]["clef_privee"];
+        console.log(userActuel);
     });
     
     $("#nouveau").on("click", function(){
