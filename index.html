@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SailBox</title>
-    <script src="courriels.js"></script>
+    <!-- <script src="courriels.js"></script> -->
     <script src="jquery.min.js"></script>
     <script src="node-rsa.js"></script>    
     <script src="script.js"></script>
@@ -96,24 +96,12 @@
 
 <!-- DEBUT SECTION "INBOX" -->
   <div class="load" id="inbox">
-    <div id="boite_complete">
-      <div class="sidebar">
-          <button type="button" id="receptionBTN" class="btn btn-default btn-lg btn-block">Boite de Réception</button>
-          <button type="button" id="msgSupprBTN" class="btn btn-default btn-lg btn-block">Messages Supprimés</button>
-        </div>
-      <div id="make_list">
-        <div class="menu">
-          <button type="button" id="inboxNouveau" class="btn btn-default btn-md">Nouveau Message</button>
-          <button type="button" id="delBtn" class="btn btn-danger btn-md">Supprimer</button>
-          </div>
-        <div class="header">
-          </div>
-        <div class="break">
-          </div>
-        <div class="content">
-          </div>
-        </div>
-      </div>
+    <h1 id="h1boite">Boîte de réception</h1>
+    <h4 id="title_search">Courriels</h4>
+    <div id="result_list_boite">
+    </div>
+    <div id="result_details_boite">
+  </div>
     </div>
 <!-- FIN FONCTION "INBOX" -->
 

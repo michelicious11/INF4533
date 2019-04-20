@@ -80,11 +80,11 @@ var getFormattedDate = function() {
     return str;
 }
 
-$(document).ready(function(){
+var monUser = "";
+var maKeyPriv = "";
+var userActuel = "";
 
-    var monUser = "";
-    var maKeyPriv = "";
-    var userActuel = "";
+$(document).ready(function(){
 
     $(".load").hide();
     $(".load").css({"visibility":"visible"});
@@ -198,7 +198,6 @@ $(document).ready(function(){
 
     //  ----- Début des fonctions des boutons -----
 
-    init();
 
     // Fonction d'envoi de message. Le message est converti en objet JSON, envoyé au serveur, puis stocké dans le fichier courriels.JSON
 
@@ -280,11 +279,6 @@ $(document).ready(function(){
         $(".modal").find("input[type=text], textarea").val("");
     });
 
-    $("#inboxBtn").click(function() {
-        $(".load").hide();
-        $("#inbox").show();
-    });
-
     $("#carnetBtn").click(function() {
         $(".load").hide();
         $(".champs").text("");
@@ -320,6 +314,82 @@ $(document).ready(function(){
     });
 
     //  ----- Fin des fonctions des boutons -----
+
+    //  ----- Début de la fonction de la boîte de réception -----
+
+    $("#inboxBtn").click(function() {
+        $(".load").hide();
+
+        $.ajax({
+            url: "/getLetters",
+            data: {
+                pem: monUser
+            },
+            contentType: "application/json",
+            // La méthode par défaut est GET
+            success: function(response){
+                var courriels = response.emails;
+                //Génère la liste des courriels
+                $("#result_list_boite").html("");
+                $("#result_list_boite").animate({ scrollTop: 0 }, "fast");
+                    for (var i = 0; i < courriels.length; i++){
+                        var courrielActuel = decrypt_message(courriels[i], maKeyPriv);
+                        $("#result_list_boite").append(
+                            "<ul id='resultB" + i + "'>" +
+                            "<li> Expéditeur :   " + courrielActuel.from + "</li>" +
+                            "<li> Destinataire : " + courrielActuel.to + "</li>" +
+                            "<li> Date :         " + courrielActuel.date + "</li>" +
+                            "<li> Objet :        " + courrielActuel.subject + "</li>" +
+                            "</ul>" +
+                            "<hr>"
+                        );
+                    }
+            }
+        });
+
+        $(".load").hide();
+
+        $("#result_details_boite").html("");
+
+        //Quand on clique sur un courriel de la liste pour afficher les détails
+        $("#result_list_boite").on("click", "ul", function() {
+            var element_num = $(this).attr('id')[7];
+            $.ajax({
+                url: "/getLetters",
+                data:{
+                    pem: monUser
+                },
+                contentType: "application/json",
+                // Default methode is GET, no need to specify here
+                success: function(response){
+                    var courriels = response.emails;
+                    $("#result_list_boite ul").css({'background-color': '#8298C2'});
+                    $("#resultB" + element_num).css({'background-color': '#b6cbed'});
+                    $("#result_list_boite ul").hover(function() {
+                        $("#result_list_boite ul").css({'background-color': '#8298C2'});
+                        $("#resultB" + element_num).css({'background-color': '#b6cbed'});
+                        $(this).css('background-color','#b6cbed')
+                    });
+                    $("#result_details_boite").html("");
+                    var courrielActuel = decrypt_message(courriels[element_num], maKeyPriv);
+                    $("#result_details_boite").append(
+                        "<ul id='courriel'>" +
+                        "<li> Expéditeur :   " + courrielActuel.from + "</li>" +
+                        "<li> Destinataire : " + courrielActuel.to + "</li>" +
+                        "<li> Date :         " + courrielActuel.date + "</li>" +
+                        "<li> Objet :        " + courrielActuel.subject + "</li>" +
+                        "</ul>" +
+                        "<hr>" +
+                        "<p>" +                  courrielActuel.body + "</p>"
+                    );
+                }
+            });        
+        });
+
+        $("#inbox").show();
+    });
+
+    //  ----- Fin de la fonction de la boîte de réception -----
 
 });
 
@@ -409,250 +479,3 @@ function compact() {
 
 
     //  ----- Fin de la fonction du carnet -----
-
-
-    //  ----- Début de la fonction de la fonction de la boîte de réception -----
-
-
-    // Fonctions d'ouverture de la boîte de réception et initialisation des messages
-class email {
-    constructor() {
-        this.inbox = [];
-        this.trash = [];
-        this.selectedelement = null;
-    }
-    createchild(header, mail) {
-        let p = document.createElement("button");
-        p.setAttribute("type", "button");
-        p.setAttribute("class", "messageButton")
-        p.setAttribute("onclick", "select(this)");
-        p.innerHTML = mail.getsubject();
-        header.appendChild(p);
-        return p;
-    }
-    loadinbox() {
-
-        this.clean();
-
-        let header = document.getElementsByClassName("header")[0];
-        this.inbox.forEach(mail => {
-            let p = this.createchild(header, mail);
-            mail.setelement(p);
-        });
-
-    }
-    loadtrash() {
-
-        this.clean();
-
-        let header = document.getElementsByClassName("header")[0];
-        this.trash.forEach(mail => {
-            let p = this.createchild(header, mail);
-            mail.setelement(p);
-        });
-        let restore = document.createElement("button");
-        let menu = document.getElementsByClassName("menu")[0];
-        restore.setAttribute("type", "button");
-        restore.setAttribute("class", "btn btn-success btn-md");
-        restore.setAttribute("id", "restorebutton");
-        restore.setAttribute("onclick", "restore()");
-        restore.innerHTML = "Restaurer";
-        menu.appendChild(restore);
-    }
-
-    // Fonction de destruction de messages
-
-    deletemessage() {
-        if (this.selectedelement === null) {
-            return;
-        }
-        let object = this.getselectedobject();
-        if (object == null) {
-            return;
-        }
-        if (!object.getdeleted()) {
-            object.getelement().remove();
-            object.deleteme();
-            let index = this.inbox.findIndex(function (o) {
-                return o.getelement() === object.getelement();
-            });
-            this.inbox.splice(index, 1);
-            this.trash.push(object);
-        }
-        else {
-            object.getelement().remove();
-            let index = this.trash.findIndex(function (o) {
-                return o.getelement() === object.getelement();
-            });
-            this.trash.splice(index, 1);
-        }
-        document.getElementsByClassName("content")[0].innerHTML = "";
-        this.selectedelement = null;
-    }
-
-    // Fonction de récupération de message éffacés
-
-    restoremessage() {
-        if (this.selectedelement === null) {
-            return;
-        }
-        let object = this.getselectedobject();
-        if (object === null) {
-
-            return;
-        }
-
-        if (!object.getdeleted()) {
-
-            return;
-        }
-
-        object.getelement().remove();
-        object.restoreme();
-
-        this.inbox.push(object);
-        let index = this.trash.findIndex(function (o) {
-            return o.getelement() == object.getelement();
-        });
-        this.trash.splice(index, 1);
-
-        document.getElementsByClassName("content")[0].innerHTML = "";
-        this.selectedelement = null;
-    }
-    select(element) {
-        this.selectedelement = element;
-        let object = this.getselectedobject(element);
-        if (object != null) {
-            document.getElementsByClassName("content")[0].innerHTML = object.getmessage();
-        }
-    }
-    getselectedobject() {
-        var object = null;
-        for (var index = 0; index < this.inbox.length; ++index) {
-            let mail = this.inbox[index];
-            if (mail.getelement() == this.selectedelement) {
-                object = mail;
-                break;
-            }
-        }
-        if (object !== null) {
-            return object;
-        }
-        for (var index = 0; index < this.trash.length; ++index) {
-            let mail = this.trash[index];
-            if (mail.getelement() === this.selectedelement) {
-                object = mail;
-                break;
-            }
-        }
-        return object;
-    }
-    clean() {
-        document.getElementsByClassName("content")[0].innerHTML = "";
-        if (document.getElementById("restorebutton")) {
-            document.getElementById("restorebutton").remove();
-        }
-        this.inbox.forEach(mail => {
-            if (mail.getelement() != null) {
-                mail.getelement().remove();
-
-            }
-        });
-        this.trash.forEach(mail => {
-            if (mail.getelement() != null) {
-                mail.getelement().remove();
-            }
-        });
-    }
-    mailListing(subject, body, date) {
-        var mail = new envelope();
-        mail.setsubject(subject);
-        mail.setmessage(body);
-        this.inbox.push(mail);
-    }
-}
-
-class envelope {
-    constructor() {
-
-        this.element = null;
-        this.deleted = false;
-        this.message = null;
-        this.date = null;
-        this.subject = null;
-    }
-    setelement(element) {
-        this.element = element;
-    }
-    setsubject(subject) {
-        this.subject = subject;
-    }
-    setmessage(message) {
-        this.message = message;
-    }
-    getmessage() {
-        return this.message;
-    }
-    getdate() {
-        return this.date;
-    }
-    getsubject() {
-        return this.subject;
-    }
-    getelement() {
-        return this.element;
-    }
-    getdeleted() {
-        return this.deleted;
-    }
-    deleteme() {
-        this.deleted = true;
-    }
-    restoreme() {
-        this.deleted = false;
-    }
-}
-
-var e;
-function init() {
-    e = new email();
-    mailListing();
-    e.loadinbox();
-
-}
-function loadinbox() {
-    e.loadinbox();
-}
-function loadtrash() {
-    e.loadtrash();
-}
-function select(element) {
-    e.select(element);
-}
-function deletemessage() {
-    e.deletemessage();
-}
-function restore() {
-
-    e.restoremessage();
-}
-
-// Ici les emails qui vont apparaitre dans l'inbox, ("titre du courriel"."contenue du courriel")
-function mailListing() {
-    var summary = "";
-    var courriel_complet = "";
-    for (var i = 0; i < courriels.length; i++){
-        summary = "De : " + courriels[i].from +
-                      ", À : " + courriels[i].to +
-                      ", Date : " + courriels[i].date +
-                      ", Objet : " + courriels[i].subject;
-        courriel_complet =  "De : " + courriels[i].from +
-                            "\nÀ : " + courriels[i].to +
-                            "\nDate : " + courriels[i].date +
-                            "\nObjet : " + courriels[i].subject +
-                            "\n\n" + courriels[i].body;
-        e.mailListing(summary, courriel_complet);
-    }
-}
-
-    //  ----- Fin de la fonction de la fonction de la boîte de réception -----

@@ -105,13 +105,6 @@ blockquote {
   cursor:pointer;
 }
 
-.sidebar {
-  position: fixed;
-  width: 250px;
-  height: 100%;
-  font-family: Garamond, sans-serif;
-}
-
     /*Pour le bouton de nouveau courriel*/
 #nouveau {
   margin: 10px;
@@ -212,8 +205,6 @@ hr {
 
 
 }
-
-
 
 .button1 {
   margin: 10px;
@@ -355,7 +346,6 @@ hr {
   border: 2px solid #4C5763;
 }
 
-
 #ajoutPersonne:hover {
   background-color: #0A7CF3;
   border: 2px solid #51565C
@@ -440,7 +430,6 @@ hr {
   text-align: center;
 }
 
-
 #contacts_Courriel {
   color: #34383E;
   font-size: 22px;
@@ -508,41 +497,27 @@ hr {
   background-color: #78a8db;
 }
 
-#msgSupprBTN {
-  margin: 10px;
-  background-color: #1B4067;
-  border-radius: 10px;
-  border: 2px solid #4C5763;
-  cursor:pointer;
-  height: 35px;
-  width: 200px;
-  font-weight: bold;
-  color: #CAE4FF;
-  font-size: 14px;
-  box-shadow: 0px 6px 8px -7px #BDD1E7;
-}
-
-
 p.subject{
   border-style: solid;
   border-color: #262626;
 }
 
-#receptionBTN {
-  margin: 10px;
-  background-color: #1B4067;
-  border-radius: 10px;
-  border: 2px solid #4C5763;
-  cursor:pointer;
-  height: 35px;
-  width: 200px;
-  font-weight: bold;
-  color: #CAE4FF;
-  font-size: 14px;
-  box-shadow: 0px 6px 8px -7px #BDD1E7;
+#result_details {
+  border: 1px black solid;
+  border-color: #4F5B43;
+  color: #374154;
+  float: left;
+  width: 67%;
+  height: 80%;
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom,#7488AE, #8298C2);
+  white-space: pre-line;
+  padding: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  overflow: auto;
 }
 
-#result_details {
+#result_details_boite {
   border: 1px black solid;
   border-color: #4F5B43;
   color: #374154;
@@ -586,6 +561,14 @@ p.subject{
   margin-bottom: 5px;
 }
 
+#h1boite {
+  color: #2E3647;
+  font-family: Impact, Charcoal, sans-serif;
+  font-style: italic;
+  background-image: linear-gradient(to right, #4065B7, #6693F4);
+  margin-bottom: 5px;
+}
+
 #ma_recherche {
   padding: 6px;
   margin: 8px 0px 0px 8px;
@@ -620,6 +603,33 @@ p.subject{
   background-color: #b6cbed;
 }
 
+#result_list_boite {
+  border: 1px black solid;
+  border-color: #4F5B43;
+  border-radius: 3px;
+  color: #374154;
+  margin-right: 20px;
+  float: left;
+  width: 25%;
+  height: 80%;
+  background-image: linear-gradient(to bottom,#7488AE, #8298C2);
+  white-space: pre-line;
+  padding: 5px;
+  overflow: auto;
+}
+
+#result_list_boite > * {
+  color: rgb(90, 85, 57);
+  font-size: 10pt;
+  font-family: 'Times New Roman', Times, serif;
+  list-style-type:none;
+  cursor: pointer;
+}
+
+#result_list_boite ul:hover {
+  background-color: #b6cbed;
+}
+
 #searchresult {
   font-family: "Helvetica", sans-serif;
   font-size: 14pt;
@@ -650,59 +660,13 @@ p.subject{
 /*Fin Section "A Propos"*/
 
 /*Debut Section Inbox*/
+
 #inbox {
-  display: flex;
-}
-
-#boite_complete {
-  display: inline-block;
-  width: 100%;
+  font-family: "Helvetica", sans-serif;
+  font-size: 14pt;
   height: 100%;
 }
 
-.menu {
-  position: relative;
-  width: 100%;
-  height: 5%;
-}
-
-.header{
-  position: relative;
-  width: 100%;
-  height: 45%;
-  display: block;
-  overflow: auto;
-  border: 1px #4F5B43 solid;
-  border-style: double;
-  border-radius: 4px;
-  margin-bottom: 3px;
-  background-image: linear-gradient(to right,#7488AE, #8298C2);
-}
-
-.header p:hover{
-  color: #FD6840;
-  cursor: pointer;
-}
-
-.content{
-  position: relative;
-  width: 100%;
-  height: 45%;
-  overflow: auto;
-  white-space: pre-wrap;
-  border: 1px #4F5B43 solid;
-  border-style: double;
-  border-radius: 4px;
-  margin-bottom: 3px;
-  background-image: linear-gradient(to right,#7488AE, #8298C2);
-}
-
-#make_list {
-  margin-left: 250px;
-  position: fixed;
-  width: 50%;
-  height: 100%;
-}
 /*Fin Section Inbox*/
 
 @keyframes boxopen {
