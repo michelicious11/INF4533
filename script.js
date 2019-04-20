@@ -72,6 +72,8 @@ var surligne_texte = function(mots, texte){
     return temp_texte;
 };
 
+// Variable utilisée pour marquer la date et le temps d'envoi d'un message
+
 var getFormattedDate = function() {
     var date = new Date();
     var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -198,6 +200,8 @@ $(document).ready(function(){
 
     init();
 
+    // Fonction d'envoi de message. Le message est converti en objet JSON, envoyé au serveur, puis stocké dans le fichier courriels.JSON
+
     $("#send").on("click", function(e){
         if (document.getElementById("receveur").value != "" && document.getElementById("recipientsobj").value != "" && document.getElementById("modal_body").value != ""){
             var destinataire = document.getElementById("receveur").value;
@@ -232,11 +236,10 @@ $(document).ready(function(){
                         error: function(){
                             alert("error")
                         }
-                         
-
+                        
                     });   
                 }
-            
+    // Vérification d'entrées dans les champs de texte          
             };
             if (colis_json === ""){
                 alert("Adresse inconnue. Veuillez consulter le carnet d'adresses.");
@@ -252,6 +255,8 @@ $(document).ready(function(){
         }
     });
 
+    // Fonction de sélection d'utilisateur à la page principale. 
+
     $("#getUser").on("click", function(){
         userActuel = $("#user_list option:selected").text();
         $("#userChoisi").text("Utilisateur choisi! Bienvenue " + userActuel + "!");
@@ -260,6 +265,8 @@ $(document).ready(function(){
         maKeyPriv = carnet_contacts[$("#user_list option:selected").val()]["clef_privee"];
     });
     
+    // Gestion d'affichage des fenêtres
+
     $("#nouveau").on("click", function(){
         $(".modal").css("display", "block");
     });
@@ -318,7 +325,7 @@ $(document).ready(function(){
 
     //  ----- Début de la fonction du carnet -----
 
-
+    // Tableau des utilisateurs et de leurs attributs
 var carnet_contacts = [
   {
     "nom" : "Carmen Sandiego",
@@ -356,8 +363,9 @@ var carnet_contacts = [
   }
 ];
 
+// Création de la liste des contacts et des opérations disponibles dans la section carnet
+
 var suppWindow = true;
-var gungovitch = "caca";
 var liste_carnet = function (){
     $("#contacts_Prenom").html("Prénom");
     $("#contacts_Famille").html("Nom de Famille");
@@ -375,9 +383,13 @@ var liste_carnet = function (){
     }
 };
 
+// Fonction d'envoi de message à partir du carnet d'adresses
+
 function sendMSG() {
     $(".modal").css("display", "block");
   }
+
+// Fonctions d'affichage des clefs publiques
 
 function showPublicKey(x) {
     $("#keyshare").html("");
@@ -401,6 +413,8 @@ function compact() {
 
     //  ----- Début de la fonction de la fonction de la boîte de réception -----
 
+
+    // Fonctions d'ouverture de la boîte de réception et initialisation des messages
 class email {
     constructor() {
         this.inbox = [];
@@ -445,6 +459,9 @@ class email {
         restore.innerHTML = "Restaurer";
         menu.appendChild(restore);
     }
+
+    // Fonction de destruction de messages
+
     deletemessage() {
         if (this.selectedelement === null) {
             return;
@@ -472,6 +489,9 @@ class email {
         document.getElementsByClassName("content")[0].innerHTML = "";
         this.selectedelement = null;
     }
+
+    // Fonction de récupération de message éffacés
+
     restoremessage() {
         if (this.selectedelement === null) {
             return;

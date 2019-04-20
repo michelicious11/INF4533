@@ -22,6 +22,8 @@ app.use('/favicon.ico', express.static('favicon.ico'));
 
 var my_obj = json_file_object({value:{}, file:"data/courriels.json", saveEverySecs:5, forceNew:false})
 
+// Réception des appels de requêtes clients, et réponses
+
 app.get("/getLetters", function(req, res){
     var usedKey = req.query.pem;
     res.send(my_obj[usedKey]);

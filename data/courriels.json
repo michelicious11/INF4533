@@ -5,9 +5,7 @@
   },
   "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKgus2KXPTd0JjW9J32OLZ81sLWjaGIH\ntMXS0PLpa//RerVIKyiWM5os2M33Zj2cdRzH5acuCfb7f/6M6AH0SaUCAwEAAQ==\n-----END PUBLIC KEY-----": {
     "user": "Celine Dion",
-    "emails": [
-      "RN2heuqEfNVDo6gwUGap8l6AwAZJPzdy6gH2G4Y9bzmglHj7OWllrHxa+12GnqTcDhPHKvJjsePPZtyteD+Cun4hnFl5gqULH1jJCjZBr7m/b34KkqJssKCGA0+tPEkoAQD3ixM+fMkRhAciImYxoBwQhqVmmiIx/+rpM5ayXSNljlSN32wteqZ+KDTv76ewOdTUwYlMciEF06zUDuOSaaAm9iBb83wwpZJPi5teZ8mcoaALlHph59W843mkmUi4VPquwW8ZbCGJdpKAYrhIxKZYgjQn4xK6hpuZqXEk01psZwtITOP6xpVvArFIF14+ZN1QeaQmpH2zO1neiw/3r3AZSQ5Intss5DTC7UVxhRTsVG3gWmgzOZPQu3++/8nysRTBe0UgCPTMw92kPAs8/iP/wd+4/tsNHYbjG8bd6FlE+DvwJSFJr7EWKNgipmBjZlDqSZwpoy9tCnEaLuprJo9DDqTdJqPT0UAtWdG7eueYZzu736aMKPN2G4CrC9AxesATh38lLyxWGAUF7R/6UbChXbqJJlJtbnsxS/p3ebKtUhGe2kmQT9s1Z4avKsF3BjpQPjQQUwtAH7y8r7K/yA=="
-    ]
+    "emails": []
   },
   "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKR9cgpdzoPxO02dsPbAaCVdqpwLfSnV\nGDU2j1XUna8hqCS1Y6acWvrjSMvCBS888KP7FmRMydz4E2+m4VjacK0CAwEAAQ==\n-----END PUBLIC KEY-----": {
     "user": "Hillary Clinton",
@@ -15,7 +13,9 @@
   },
   "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALpFyjnsyGcYgDQCrO5jUKDv551MKzin\nYqJGRob7GzbM5lI/z+zLxY37GsAI9SoYULM2pssXPPSohWbZXkzMse0CAwEAAQ==\n-----END PUBLIC KEY-----": {
     "user": "Jason Bourne",
-    "emails": []
+    "emails": [
+      "UoqHHiQ0q+bPGiaR5Nsd3XfU19uVfyxbY7CAoCEe3upVjx0zJj67F+IqA+/BFqvef2EAnB1jbSRar7kKDCeajBymkigWdojrVPD7/g7i73akeH5xD0kZmHfYiJhBrq+ImkFWNpYBAvbrK9HOI3Xu2A3fTH7k5OO+5iURTqj985IHTePdjTWl4IxQrqviUP7EQR/26+rZ76llkOXW/9qpHYxXv3mswLOGiKQ83+NrOmN2NJWIQgQnD1fGuM9Dnlw+FcjwwYOFI8G5fXear8H20hjWdMxa5pNrY42rFBFaYSDA+G9M16Yy5QcJWvhq/ieF2se3RahDEcydnGZu201caCr5sDJ1xIl4cgLVkKlMi/wYbohiD4KAKQagrQ0X8WdSNuGdrzIPO4FUn4E5YQ/WSy17vdHQIxBvvGYrIbTTzviqCKyKCzE397lt7n4clzacHv4U15gj4ZeAWehXkTVkDH4qL1SwSGyuKly/8QWGYUlnzSioAaJzbkopQi7MXWO6AImIGKZH4so8N9PldngNVyMxDwvmh6ghye5k6kDW5iN4LToy9/ELcQa8AoADwFm4SOrx5A2jDrCP6PGb3C31EX/sVEJorFl00dzkEPO8YfEQfW1nkiqgT11sbB0WvM6v8eiJIN0r6pw99b4BUcYee2TjnWbaRfG9GPjZxMY7LW6yrK8BVu7Xxqjwbhur2e/uC5L6spF/nePepxi0o9kDXBe0sc/vBVklq50AQYbOPzljSnEPBaDKm7SLjdfRJggF"
+    ]
   },
   "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKy33rRZsIpwoqlkb+RLLNDIVLSULKDQ\nGnWjWNqRd2iL/ujTNVEdfpprQ1t482fIJE3lBfVsGqTxZZ7nCwjwvF8CAwEAAQ==\n-----END PUBLIC KEY-----": {
     "user": "Johnny Coiffeur",
