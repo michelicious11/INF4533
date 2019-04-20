@@ -30,9 +30,7 @@ app.get("/getLetters", function(req, res){
 app.post("/addLetters", function(req, res){
     var email = req.body;
     res.send("Courriel reçu!");
-    console.log(email);
     my_obj[email["dest"]]["emails"].unshift(email["msg"]);
-    console.log(my_obj);
 });  
 
 app.listen(PORT, function() {
