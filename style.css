@@ -194,6 +194,27 @@ hr {
   text-align:center;
 }
 
+.buttonUser {
+  margin: 10px;
+  padding-top: 6px;
+  background-color: #1B4067;
+  border-radius: 10px;
+  border: 2px solid #4C5763;
+  cursor:pointer;
+  height: 30px;
+  width: 160px;
+  box-shadow: 0px 6px 8px -7px #BDD1E7;
+  color: #CAE4FF;
+  font-size: 14px;
+  font-style: initial;
+  font-weight: inherit;
+
+
+
+}
+
+
+
 .button1 {
   margin: 10px;
   background-color: #1B4067;
